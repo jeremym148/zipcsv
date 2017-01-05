@@ -55,7 +55,7 @@ function chilkatExample(csv) {
 
 
 app.get('/',function(req, res){
-	chilkatExample('test, tet1');
+	// chilkatExample('test, tet1');
 	res.send('test');
 });
 
