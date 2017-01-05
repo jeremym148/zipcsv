@@ -1,5 +1,8 @@
 var express = require('express');
+var bodyParser = require('body-parser')
 var app =express();
+app.use(bodyParser.text());
+app.use(bodyParser.urlencoded({extended: true}));
 var chilkat = require('chilkat_node7_win32'); 
 var test;
 var port =process.env.PORT || 8080;
@@ -27,14 +30,14 @@ function chilkatExample(csv) {
     zip.SetPassword("secret");
     zip.PasswordProtect = true;
 
-    var saveExtraPath;
-    saveExtraPath = false;
-    success = zip.AppendOneFileOrDir("./index.html",saveExtraPath);
-    if (success !== true) {
-        console.log(zip.LastErrorText);
-        return;
+    // var saveExtraPath;
+    // saveExtraPath = false;
+    // success = zip.AppendOneFileOrDir("./index.html",saveExtraPath);
+    // if (success !== true) {
+    //     console.log(zip.LastErrorText);
+    //     return;
 
-    }
+    // }
 
     var entry = zip.AppendString2("HelloWorld2.csv",csv,"utf-8");
 
@@ -50,13 +53,11 @@ function chilkatExample(csv) {
 }
 
 
-
-
-
-
-app.get('/',function(req, res){
-	// chilkatExample('test, tet1');
-	res.send('test');
+app.post('/createZip',function(req, res){
+    var body = req.body;
+    res.set('Content-Type', 'text/plain');
+	chilkatExample(req.body);
+	res.send(`You sent: ${body} to Express`);
 });
 
 // app.use(express.static(__dirname + '/public' ));

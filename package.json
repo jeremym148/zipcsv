@@ -10,6 +10,7 @@
   "description": "",
   "dependencies": {
     "express": "^4.13.2",
-    "chilkat_node7_win32":"^9.50.65"
+    "chilkat_node7_win32":"^9.50.65",
+    "body-parser":"^1.15.2"
   }
 }
