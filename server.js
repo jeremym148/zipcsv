@@ -60,9 +60,7 @@ app.post('/createZip',function(req, res){
 	res.send(`You sent: ${body} to Express`);
 });
 
-app.get('/', function(req, res){
-  res.send('barukh ashem');
-});
+
 
 // app.use(express.static(__dirname + '/public' ));
 
