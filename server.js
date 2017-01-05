@@ -63,6 +63,12 @@ app.post('/createZip',function(req, res){
 app.get('/', function(req, res){
   res.send('id: ' + req.query.id);
 });
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 6ea0c67257326f98c59f11396a30ebc2c77509c8
 
 // app.use(express.static(__dirname + '/public' ));
 
