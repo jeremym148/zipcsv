@@ -1,7 +1,8 @@
 var express = require('express');
 var app =express();
 var chilkat = require('chilkat_node7_win32'); 
-var test
+var test;
+var port =process.env.PORT || 8080;
 
 function chilkatExample(csv) {
 
@@ -62,6 +63,6 @@ app.get('/',function(req, res){
 
 //app.get('*', (req,res) => res.sendFile(path.join(__dirname+'/public/' + config.indexPage)))
 
-app.listen(8080, function(){
-	console.log("Server is listening on port 8080");
+app.listen(port, function(){
+	console.log("Server is listening on port "+port);
 });
