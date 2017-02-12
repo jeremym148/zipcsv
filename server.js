@@ -69,7 +69,7 @@ function sendDocToSF(){
 	// Set the headers
 	var headers = {
 	    'Authorization':       'Bearer 00D4E000000CqGg!AQoAQKfIWJi40mUMJpQgBpoBaCZZuSxIsWYpsiNvFl6DPhq6xsYfZlK1LE53xn2EQkj7pB_BiRjjVp5iGDZpK6pEnq1hXGpv ',
-	    'Content-Type':     'application/x-www-form-urlencoded'
+	    'Content-Type':     'application/json'
 	}
 
 	// Configure the request
