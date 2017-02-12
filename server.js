@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser')
 var app =express();
 var request = require('request');
+var http = require('http');
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -66,32 +67,65 @@ function chilkatExample(csv) {
 }
 
 function sendDocToSF(){
-	// Set the headers
-	var headers = {
+	var options = {
+  host: 'https://cs83.salesforce.com',
+  path: '/services/data/v39.0/sobjects/Document/',
+  method: 'POST',
+  headers: {
 	    'Authorization':       'Bearer 00D4E000000CqGg!AQoAQKfIWJi40mUMJpQgBpoBaCZZuSxIsWYpsiNvFl6DPhq6xsYfZlK1LE53xn2EQkj7pB_BiRjjVp5iGDZpK6pEnq1hXGpv ',
 	    'Content-Type':     'application/x-www-form-urlencoded'
 	}
 
-	// Configure the request
-	var options = {
-	    url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Document/',
-	    method: 'POST',
-	    headers: headers,
-	    form:{  "Description" : "hkmgjhgjhgs7777",
+};
+var bodyData="Description" : "hkmgjhgjhgs7777",
 	    		"Keywords" : "marketing,sales,update",
 	    		"folderId" : "00l4E000000EKXa",
 	    		"Name" : "Marketing Brochure Q3",
 	    		"Type" : "csv",
-	    		"body":"MSwyLDMsNA0KZGZnLGZmZixmZmYsZmZm"}
-	}
+	    		"body":"MSwyLDMsNA0KZGZnLGZmZixmZmYsZmZm";
 
-	// Start the request
-	request(options, function (error, response, body) {
-	    if (!error && response.statusCode == 201) {
-	        // Print out the response body
-	       console.log(body);
-	    }
-	})
+callback = function(response) {
+  var str = ''
+  response.on('data', function (chunk) {
+    str += chunk;
+  });
+
+  response.on('end', function () {
+    console.log(str);
+  });
+}
+
+var req = http.request(options, callback);
+//This is the data we are posting, it needs to be a string or a buffer
+req.write(bodyData);
+req.end();
+
+	// // Set the headers
+	// var headers = {
+	//     'Authorization':       'Bearer 00D4E000000CqGg!AQoAQKfIWJi40mUMJpQgBpoBaCZZuSxIsWYpsiNvFl6DPhq6xsYfZlK1LE53xn2EQkj7pB_BiRjjVp5iGDZpK6pEnq1hXGpv ',
+	//     'Content-Type':     'application/x-www-form-urlencoded'
+	// }
+
+	// // Configure the request
+	// var options = {
+	//     url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Document/',
+	//     method: 'POST',
+	//     headers: headers,
+	//     form:{  "Description" : "hkmgjhgjhgs7777",
+	//     		"Keywords" : "marketing,sales,update",
+	//     		"folderId" : "00l4E000000EKXa",
+	//     		"Name" : "Marketing Brochure Q3",
+	//     		"Type" : "csv",
+	//     		"body":"MSwyLDMsNA0KZGZnLGZmZixmZmYsZmZm"}
+	// }
+
+	// // Start the request
+	// request(options, function (error, response, body) {
+	//     if (!error && response.statusCode == 201) {
+	//         // Print out the response body
+	//        console.log(body);
+	//     }
+	// })
 }
 
 
