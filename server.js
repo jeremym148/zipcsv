@@ -81,7 +81,7 @@ function sendDocToSF(){
 	    		"Keywords" : "marketing,sales,update",
 	    		"folderId" : "00l4E000000EKXa",
 	    		"Name" : "Marketing Brochure Q3",
-	    		"Type" : "zip",
+	    		"Type" : "csv",
 	    		"body":"MSwyLDMsNA0KZGZnLGZmZixmZmYsZmZm"}
 	}
 
