@@ -69,7 +69,7 @@ function sendDocToSF(){
 	// Set the headers
 	var headers = {
 	    'Authorization':       'Bearer 00D4E000000CqGg!AQoAQKfIWJi40mUMJpQgBpoBaCZZuSxIsWYpsiNvFl6DPhq6xsYfZlK1LE53xn2EQkj7pB_BiRjjVp5iGDZpK6pEnq1hXGpv ',
-	    'Content-Type':     'application/json'
+	    'Content-Type':     'application/x-www-form-urlencoded'
 	}
 
 	// Configure the request
@@ -100,9 +100,11 @@ app.post('/createZip',function(req, res){
     res.set('Content-Type', 'text/plain');
 	chilkatExample(body);
 	res.send(`You sent: ${body} to Express`);
+	sendDocToSF();
 });
 
 app.get('/', function(req, res){
+	sendDocToSF();
   res.send(bhhhhh);
 });
 
