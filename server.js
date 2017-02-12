@@ -71,8 +71,8 @@ function sendDocToSF(){
 
 	// Set the headers
 	var headers = {
-	    'Authorization':       'Bearer 00D4E000000CqGg!AQoAQKfIWJi40mUMJpQgBpoBaCZZuSxIsWYpsiNvFl6DPhq6xsYfZlK1LE53xn2EQkj7pB_BiRjjVp5iGDZpK6pEnq1hXGpv ',
-	    'Content-Type':     'application/x-www-form-urlencoded'
+	    'Authorization': 'Bearer 00D4E000000CqGg!AQoAQKfIWJi40mUMJpQgBpoBaCZZuSxIsWYpsiNvFl6DPhq6xsYfZlK1LE53xn2EQkj7pB_BiRjjVp5iGDZpK6pEnq1hXGpv ',
+	    'Content-Type': 'application/json'
 	}
 
 	// Configure the request
@@ -80,7 +80,7 @@ function sendDocToSF(){
 	    url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Document/',
 	    method: 'POST',
 	    headers: headers,
-	    form:{  "Description" : "hkmgjhgjhgs7777",
+	    json:{  "Description" : "hkmgjhgjhgs7777",
 	    		"Keywords" : "marketing,sales,update",
 	    		"folderId" : "00l4E000000EKXa",
 	    		"Name" : "Marketing Brochure Q3",
@@ -108,7 +108,7 @@ app.post('/createZip',function(req, res){
 });
 
 app.get('/', function(req, res){
-  res.send('bhhhhh');
+	sendDocToSF();
 });
 
 // app.use(express.static(__dirname + '/public' ));
