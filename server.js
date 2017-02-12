@@ -1,8 +1,21 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var app =express();
+var request = require('request');
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
+// var pg = require('pg');
+// pg.defaults.ssl = true;
+// pg.connect(process.env.DATABASE_URL, function(err, client) {
+//   if (err) throw err;
+//   console.log('Connected to postgres! Getting schemas...');
+
+//   client
+//     .query('SELECT table_schema,table_name FROM information_schema.tables;')
+//     .on('row', function(row) {
+//       console.log(JSON.stringify(row));
+//     });
+// });
 
 // var chilkat = require('chilkat_node7_win32'); 
 
@@ -70,11 +83,42 @@ function chilkatExample(csv) {
 
 }
 
+function sendDocToSF(){
+	var request = require('request');
+
+// Set the headers
+var headers = {
+    'Authorization':       'Bearer 00D4E000000CqGg!AQoAQO165hBFn4247RwXJtziHPb2g0jwPzTcdpfwjp.RnBUAA.IdQEjC8Mpf2T4jDNjaEtn3cdOnrG9CAGhj1fHyEp2ONRlY ',
+    'Content-Type':     'application/json'
+}
+
+// Configure the request
+var options = {
+    url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Document/',
+    method: 'POST',
+    headers: headers,
+    body:{  "Description" : "Marketing brochure for Q12 207777",
+    		"Keywords" : "marketing,sales,update",
+    		"folderId" : "00l4E000000EKXa",
+    		"Name" : "Marketing Brochure Q3",
+    		"Type" : "zip",
+    		"body":"MSwyLDMsNA0KZGZnLGZmZixmZmYsZmZm"}
+}
+
+// Start the request
+request(options, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        // Print out the response body
+        console.log(body)
+    }
+})
+}
+
 
 app.post('/createZip',function(req, res){
     var body = req.body;
     res.set('Content-Type', 'text/plain');
-	chilkatExample(req.body);
+	sendDocToSF();
 	res.send(`You sent: ${body} to Express`);
 });
 
