@@ -89,7 +89,7 @@ function sendDocToSF(){
 	request(options, function (error, response, body) {
 	    if (!error && response.statusCode == 201) {
 	        // Print out the response body
-	       return body;
+	       console.log(body);
 	    }
 	})
 }
@@ -104,7 +104,8 @@ app.post('/createZip',function(req, res){
 });
 
 app.get('/', function(req, res){
-  res.send('bhhhhh');
+	var zozo=sendDocToSF();
+  res.send(${zozo});
 });
 
 // app.use(express.static(__dirname + '/public' ));
