@@ -67,7 +67,7 @@ function chilkatExample(csv) {
 }
 
 function sendDocToSF(){
-
+	
 
 	// Set the headers
 	var headers = {
@@ -84,8 +84,8 @@ function sendDocToSF(){
 	    		"Keywords" : "marketing,sales,update",
 	    		"folderId" : "00l4E000000EKXa",
 	    		"Name" : "Marketing Brochure Q3",
-	    		"Type" : "csv",
-	    		"body":"MSwyLDMsNA0KZGZnLGZmZixmZmYsZmZm"}
+	    		"Type" : "zip",
+	    		"body":"data:;base64,UEsDBBQAAQAIACRZJUowgDLeOwAAAC8AAAAPAAAASGVsbG9Xb3JsZDIuY3N2QU3xPr5XJXMVrrTHNtNYvJrl0aW3EKkxL6dpCIOtg3FrYvvP/8Zy/mKj+KPpNI18Hao39oKTVOAYX3RQSwECFAAUAAEACAAkWSVKMIAy3jsAAAAvAAAADwAAAAAAAAAAAIAAAAAAAAAASGVsbG9Xb3JsZDIuY3N2UEsFBgAAAAABAAEAPQAAAGgAAAAAAA=="}
 	}
 
 	// Start the request
