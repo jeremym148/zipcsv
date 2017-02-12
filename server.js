@@ -77,7 +77,7 @@ function sendDocToSF(){
 	    url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Document/',
 	    method: 'POST',
 	    headers: headers,
-	    form:{  "Description" : "Marketing brochure for Q12 207777",
+	    form:{  "Description" : "hkmgjhgjhgs7777",
 	    		"Keywords" : "marketing,sales,update",
 	    		"folderId" : "00l4E000000EKXa",
 	    		"Name" : "Marketing Brochure Q3",
@@ -104,7 +104,6 @@ app.post('/createZip',function(req, res){
 });
 
 app.get('/', function(req, res){
-	sendDocToSF();
   res.send(bhhhhh);
 });
 
