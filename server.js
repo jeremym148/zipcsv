@@ -109,7 +109,7 @@ var options = {
 request(options, function (error, response, body) {
     if (!error && response.statusCode == 201) {
         // Print out the response body
-        console.log(body)
+       return body;
     }
 })
 }
@@ -118,8 +118,9 @@ request(options, function (error, response, body) {
 app.post('/createZip',function(req, res){
     var body = req.body;
     res.set('Content-Type', 'text/plain');
-	sendDocToSF();
-	res.send(`You sent: ${body} to Express`);
+	
+	var zozo=sendDocToSF();
+	res.send(`You sent: ${zozo} to Express`);
 });
 
 app.get('/', function(req, res){
