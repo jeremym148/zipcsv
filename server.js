@@ -98,9 +98,8 @@ function sendDocToSF(){
 app.post('/createZip',function(req, res){
     var body = req.body;
     res.set('Content-Type', 'text/plain');
-	
-	var zozo=sendDocToSF();
-	res.send(`You sent: ${zozo} to Express`);
+	chilkatExample(body);
+	res.send(`You sent: ${body} to Express`);
 });
 
 app.get('/', function(req, res){
