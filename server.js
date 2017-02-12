@@ -4,18 +4,8 @@ var app =express();
 var request = require('request');
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
-// var pg = require('pg');
-// pg.defaults.ssl = true;
-// pg.connect(process.env.DATABASE_URL, function(err, client) {
-//   if (err) throw err;
-//   console.log('Connected to postgres! Getting schemas...');
+app.use(bodyParser.json());
 
-//   client
-//     .query('SELECT table_schema,table_name FROM information_schema.tables;')
-//     .on('row', function(row) {
-//       console.log(JSON.stringify(row));
-//     });
-// });
 
 // var chilkat = require('chilkat_node7_win32'); 
 
@@ -61,15 +51,7 @@ function chilkatExample(csv) {
     zip.SetPassword("secret");
     zip.PasswordProtect = true;
 
-    // var saveExtraPath;
-    // saveExtraPath = false;
-    // success = zip.AppendOneFileOrDir("./index.html",saveExtraPath);
-    // if (success !== true) {
-    //     console.log(zip.LastErrorText);
-    //     return;
-
-    // }
-
+    
     var entry = zip.AppendString2("HelloWorld2.csv",csv,"utf-8");
 
     var success = zip.WriteZipAndClose();
@@ -84,34 +66,32 @@ function chilkatExample(csv) {
 }
 
 function sendDocToSF(){
-	var request = require('request');
+	// Set the headers
+	var headers = {
+	    'Authorization':       'Bearer 00D4E000000CqGg!AQoAQKfIWJi40mUMJpQgBpoBaCZZuSxIsWYpsiNvFl6DPhq6xsYfZlK1LE53xn2EQkj7pB_BiRjjVp5iGDZpK6pEnq1hXGpv ',
+	    'Content-Type':     'application/json'
+	}
 
-// Set the headers
-var headers = {
-    'Authorization':       'Bearer 00D4E000000CqGg!AQoAQKfIWJi40mUMJpQgBpoBaCZZuSxIsWYpsiNvFl6DPhq6xsYfZlK1LE53xn2EQkj7pB_BiRjjVp5iGDZpK6pEnq1hXGpv ',
-    'Content-Type':     'application/json'
-}
+	// Configure the request
+	var options = {
+	    url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Document/',
+	    method: 'POST',
+	    headers: headers,
+	    form:{  "Description" : "Marketing brochure for Q12 207777",
+	    		"Keywords" : "marketing,sales,update",
+	    		"folderId" : "00l4E000000EKXa",
+	    		"Name" : "Marketing Brochure Q3",
+	    		"Type" : "zip",
+	    		"body":"MSwyLDMsNA0KZGZnLGZmZixmZmYsZmZm"}
+	}
 
-// Configure the request
-var options = {
-    url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Document/',
-    method: 'POST',
-    headers: headers,
-    body:{  "Description" : "Marketing brochure for Q12 207777",
-    		"Keywords" : "marketing,sales,update",
-    		"folderId" : "00l4E000000EKXa",
-    		"Name" : "Marketing Brochure Q3",
-    		"Type" : "zip",
-    		"body":"MSwyLDMsNA0KZGZnLGZmZixmZmYsZmZm"}
-}
-
-// Start the request
-request(options, function (error, response, body) {
-    if (!error && response.statusCode == 201) {
-        // Print out the response body
-       return body;
-    }
-})
+	// Start the request
+	request(options, function (error, response, body) {
+	    if (!error && response.statusCode == 201) {
+	        // Print out the response body
+	       return body;
+	    }
+	})
 }
 
 
