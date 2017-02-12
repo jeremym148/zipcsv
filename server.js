@@ -108,8 +108,7 @@ app.post('/createZip',function(req, res){
 });
 
 app.get('/', function(req, res){
-	sendDocToSF();
-  res.send(bhhhhh);
+  res.send('bhhhhh');
 });
 
 // app.use(express.static(__dirname + '/public' ));
