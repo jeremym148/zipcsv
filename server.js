@@ -128,7 +128,7 @@ function connectToSF(callback2){
 	      //  		var sessionId=json[0][0][1].loginResponse.result.sessionId;
 	      //  		console.log(sessionId);
 	       		callback2(sessionId);
-			});
+			
 	    }else {console.log("eror"+error);}
 	})
 }
