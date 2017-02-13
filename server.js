@@ -123,7 +123,7 @@ function connectToSF(callback2){
 	       console.log(body);
 	       var xml=body;
 	       parseString(xml, function (err, result) {
-			    var json=JSON.stringify(result));
+			    var json=JSON.stringify(result);
 	       		var sessionId=json.loginResponse.result.sessionId;
 	       		console.log(sessionId);
 	       		callback2(sessionId);
