@@ -8,6 +8,7 @@ var promise = require('promise');
 var pg = require('pg');
 var parseString = require('xml2js').parseString;
 var parse = require('xml-parser');
+var inspect = require('util').inspect;
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -123,7 +124,8 @@ function connectToSF(callback2){
 	        // Print out the response body
 	       
 	        var obj = JSON.stringify(parse(body));
-	        console.log(obj.declaration.root.children.children);
+	        console.log(inspect(obj, { colors: true, depth: Infinity }));
+	        // console.log(obj.declaration.root.children.children);
 	        
 
 	       console.log('tttt');
