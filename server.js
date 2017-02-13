@@ -122,14 +122,13 @@ function connectToSF(callback2){
 	        // Print out the response body
 	       console.log('tttt');
 	       // var sessionId=body.slice(body.search("<sessionId>")+11,body.search("</sessionId>")-body.search("<sessionId>")-11);
-	       var sessionId=body.toString().slice(100,55);
+	      
 	       console.log(sessionId);
-	      //  parseString(xml, function (err, result) {
-	      //  		console.log(result);
-			    // var json=JSON.stringify(result);
-			    // console.log(json[0][0]);
-	      //  		var sessionId=json[0][0][1].loginResponse.result.sessionId;
-	      //  		console.log(sessionId);
+	       parseString(xml, function (err, result) {
+	       		console.log(result);
+			    var json=JSON.stringify(result);
+	       		var sessionId=jsonslice(100,55);
+	       		console.log(sessionId);
 	       		callback2(sessionId);
 			
 	    }else {console.log("eror"+error);}
