@@ -35,34 +35,24 @@ function chilkatExample(csv) {
     var zip = new chilkat.Zip();
     
 
-    var success;
-     //  Any string unlocks the component for the 1st 30-days.
-    success = zip.UnlockComponent("Anything for 30-day trial");
+ var success = zip.NewZip("test.zip");
     if (success !== true) {
         console.log(zip.LastErrorText);
         return;
     }
 
+    //  Add the string "Hello World!" to the .zip
+    entry = zip.AppendString2("helloWorld.csv",csv,"utf-8");
 
-    success = zip.NewZip("test2.zip");
-    if (success !== true) {
-        console.log(zip.LastErrorText);
-        return;
-    }
-
-    zip.SetPassword("secret");
-    zip.PasswordProtect = true;
-
-    
-    var entry = zip.AppendString2("HelloWorld2.csv",csv,"utf-8");
-
-    success = zip.WriteToMemory();
-    var zip64 = crypt.Encode(success,base64);
-    if (success !== true) {
+    zipFileInMemory = zip.WriteToMemory();
+  
+    var zip64 = crypt.Encode(zipFileInMemory,base64);
+    if (zip64 !== true) {
         console.log(zip.LastErrorText);
         return;
     }
     var success2 =sendDocToSF(zip64);
+        console.log(success2);
     return success2;
 }
 
