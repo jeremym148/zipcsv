@@ -82,7 +82,7 @@ function sendDocToSF(zip64, callback){
 
 	// Set the headers
 	var headers = {
-	    'Authorization': 'Bearer 00D4E000000CqGg!AQoAQHMq.exoKn4gnF5ZOEV_kGo3x0lKVDBrxm3g83LutMDPlT0WU9tMmBdtDUGFnDo05pIb3T3971iZtti2btXsSTxq5rPJ ',
+	    'Authorization': 'Bearer 00D3E0000008yUF!AQcAQL3dDhReSUzAjP8FvpAOK4pbpTwjRjjaRapwnBwN3aJXN7Jo13b8hTveyWw7TOvJSB6d6aTpuXck2qT5ur9jsejX2WkZ ',
 	    'Content-Type': 'application/json'
 	}
 
@@ -99,11 +99,11 @@ function sendDocToSF(zip64, callback){
 	//     		"body":zip64}
 	// }
 
-	   url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Attachment/',
+	   url: 'https://cs82.salesforce.com/services/data/v39.0/sobjects/Attachment/',
 	    method: 'POST',
 	    headers: headers,
 	    json:{  "Description" : "hkmgjhgjhgs7777",
-	    		"ParentId" : "0064E000003YMcM",
+	    		"ParentId" : "a003E000001f8VA",
 	    		"Name" : "TEST.zip",
 	    		"ContentType" : ".zip",
 	    		"body":zip64}
