@@ -122,15 +122,22 @@ function connectToSF(callback2){
 	        // Print out the response body
 	       console.log('tttt');
 	       // var sessionId=body.slice(body.search('"sessionId":["')+14,body.search('"],"userId')-body.search('"sessionId":["')-14);
-	       // parseString(body, function (err, result) {
+	       parseString(body, function (err, result) {
 	       		// console.log(result);
-	       		var json=JSON.stringify(body);
+	       		var json=JSON.stringify(result);
+	       		var array = [];
 			    console.log(json);
-			    var sessionId=json.slice(50,50);
-	       		// var sessionId=json.soapenv_Envelope;
-	       		console.log(sessionId);
-	       		callback2(sessionId);
-			// });
+			    for(var key in json){
+				    if(!json.hasOwnProperty(key)){
+				        continue;
+				    }
+				    array.push(key, json[key]);
+				}console.log(array, array.slice(0, 4));
+			    // var sessionId=json.slice(50,50);
+	      //  		// var sessionId=json.soapenv_Envelope;
+	      //  		console.log(sessionId);
+	      //  		callback2(sessionId);
+			});
 	    }else {console.log("eror"+error);}
 	})
 }
