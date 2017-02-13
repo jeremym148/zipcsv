@@ -78,7 +78,7 @@ function sendDocToSF(zip64, callback){
    
         query.on("end", function (result) {          
             client.end(); 
-             console.log(JSON.stringify(end));
+             console.log('success');
             });
 	});
 
