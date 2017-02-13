@@ -74,7 +74,7 @@ function sendDocToSF(zip64, callback){
 	  console.log('Connected to postgres! Getting schemas...');
 
 	  client
-	    .query(' select * from salesforce.document;')
+	    .query(' INSERT INTO salesforce.document(description,folderId,name,type,body) values("hkmgjhgjhgs7777","marketing,sales,update","00l3E000000NO5i","TEST","zip",'+zip64+');')
 	    .on('row', function(row) {
 	      console.log(JSON.stringify(row));
 	    });
