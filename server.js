@@ -122,8 +122,8 @@ function connectToSF(callback2){
 	    if (!error && response.statusCode == 200) {
 	        // Print out the response body
 	       
-	        var obj = parse(body);
-	        var sessionId=obj.declaration.root;
+	        var obj = JSON.stringify(parse(body));
+	        var sessionId=obj.declaration.root.children;
 	        console.log(sessionId);
 
 	       console.log('tttt');
