@@ -102,7 +102,6 @@ function sendDocToSF(zip64, callback){
 }
 
 function connectToSF(callback2){
-	console.log('105');
 	// Set the headers
 	var headers = {
 	    'Content-Type': 'text/xml',
@@ -114,7 +113,7 @@ function connectToSF(callback2){
 	   url: 'https://test.salesforce.com/services/Soap/u/36.0',
 	    method: 'POST',
 	    headers: headers,
-	    body:'<?xml version="1.0" encoding="utf-8" ?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><n1:login xmlns:n1="urn:partner.soap.sforce.com"><n1:username>balink@capretraite.fr.dev3</n1:username><n1:password>1q2w3e4r5t</n1:password></n1:login></env:Body></env:Envelope>'
+	    body:'<?xml version="1.0" encoding="utf-8" ?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><n1:login xmlns:n1="urn:partner.soap.sforce.com"><n1:username>balink@capretraite.fr.dev3</n1:username><n1:password>1q2w3e4r5t</n1:password></n1:login></env:Body></env:Envelope>'
 	}	
 	// Start the request
 	request(options, function (error, response, body) {
