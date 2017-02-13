@@ -48,11 +48,17 @@ function chilkatExample(csv) {
     if (zipFileInMemory == null ) {
         console.log("zipmem "+zip.LastErrorText);
         return;
+    }else{
+    	 console.log("zipmem "+zip.LastErrorText);
+    	  console.log("zipmem2 "+ zipFileInMemory);
     }
     var zip64 = crypt.Encode(zipFileInMemory,base64);
     if (zip64 == null ) {
         console.log(zip.LastErrorText);
         return;
+    }else{
+    	 console.log("crypt "+zip.LastErrorText);
+    	  console.log("crypt2 "+ zipFileInMemory);
     }
     console.log(zip64);
     var success2 =sendDocToSF(zip64);
