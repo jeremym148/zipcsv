@@ -121,7 +121,8 @@ function connectToSF(callback2){
 	    if (!error && response.statusCode == 200) {
 	        // Print out the response body
 	       console.log('tttt');
-	       var sessionId=body.slice(body.search("<sessionId>")+11,body.search("</sessionId>")-body.search("<sessionId>")-11);
+	       // var sessionId=body.slice(body.search("<sessionId>")+11,body.search("</sessionId>")-body.search("<sessionId>")-11);
+	       var sessionId=body.slice(100,55);
 	       console.log(sessionId);
 	      //  parseString(xml, function (err, result) {
 	      //  		console.log(result);
