@@ -64,9 +64,7 @@ function chilkatExample(csv, callback) {
         return;
     }
     console.log(zip64);
-    callback( sendDocToSF(zip64, function(res){
-    	return res;
-    }));
+     sendDocToSF(zip64, callback);
 }
 
 function sendDocToSF(zip64, callback){
