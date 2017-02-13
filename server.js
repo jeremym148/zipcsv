@@ -117,7 +117,6 @@ function connectToSF(callback2){
 	}	
 	// Start the request
 	request(options, function (error, response, body) {
-		console.log(response.statusCode);
 		console.log(body);
 	    if (!error && response.statusCode == 200) {
 	        // Print out the response body
@@ -126,8 +125,8 @@ function connectToSF(callback2){
 	       parseString(xml, function (err, result) {
 	       		console.log(result);
 			    var json=JSON.stringify(result);
-			    console.log(json.soapenv:Envelope);
-	       		var sessionId=json.soapenv:Envelope.$.xmlns:soapenv.soapenv:Body.loginResponse.result.sessionId;
+			    console.log(json[0]);
+	       		var sessionId=json[0][0][1]..loginResponse.result.sessionId;
 	       		console.log(sessionId);
 	       		callback2(sessionId);
 			});
