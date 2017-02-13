@@ -45,7 +45,10 @@ function chilkatExample(csv) {
     entry = zip.AppendString2("helloWorld.csv",csv,"utf-8");
 
     zipFileInMemory = zip.WriteToMemory();
-  console.log("testmem:"+zipFileInMemory);
+    if (zipFileInMemory == null ) {
+        console.log("zipmem "+zip.LastErrorText);
+        return;
+    }
     var zip64 = crypt.Encode(zipFileInMemory,base64);
     if (zip64 == null ) {
         console.log(zip.LastErrorText);
@@ -53,7 +56,6 @@ function chilkatExample(csv) {
     }
     console.log(zip64);
     var success2 =sendDocToSF(zip64);
-        console.log(success2);
     return success2;
 }
 
