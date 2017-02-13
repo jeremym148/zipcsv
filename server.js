@@ -118,6 +118,7 @@ function connectToSF(callback2){
 	}	
 	// Start the request
 	request(options, function (error, response, body) {
+		console.log(response.statusCode);
 	    if (!error && response.statusCode == 200) {
 	        // Print out the response body
 	       console.log('123'+body);
