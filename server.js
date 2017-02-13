@@ -121,12 +121,13 @@ function connectToSF(callback2){
 	    if (!error && response.statusCode == 200) {
 	        // Print out the response body
 	       console.log('tttt');
-	       // var sessionId=body.slice(body.search('\"sessionId\":[\"')+11,body.search("\"],\"userId")-body.search("<sessionId>")-11);
+	       // var sessionId=body.slice(body.search('"sessionId":["')+14,body.search('"],"userId')-body.search('"sessionId":["')-14);
 	       parseString(body, function (err, result) {
 	       		console.log(result);
 	       		var json=(JSON.stringify(result).replace(":","_"));
 			    console.log(json);
-	       		var sessionId=json.soapenv_Envelope;
+			    var sessionId=json.slice(json.search('"sessionId":["')+14,json.search('"],"userId')-json.search('"sessionId":["')-14);
+	       		// var sessionId=json.soapenv_Envelope;
 	       		console.log(sessionId);
 	       		callback2(sessionId);
 			});
