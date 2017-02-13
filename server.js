@@ -120,14 +120,14 @@ function connectToSF(callback2){
 		console.log(body);
 	    if (!error && response.statusCode == 200) {
 	        // Print out the response body
-	       console.log(body);
-	       var xml=body;
-	       parseString(xml, function (err, result) {
-	       		console.log(result);
-			    var json=JSON.stringify(result);
-			    console.log(json[0][0]);
-	       		var sessionId=json[0][0][1].loginResponse.result.sessionId;
-	       		console.log(sessionId);
+	       var sessionId=body.slice(body.search("<sessionId>")+11,body.search("</sessionId>")-body.search("<sessionId>")-11);
+	       console.log(sessionId);
+	      //  parseString(xml, function (err, result) {
+	      //  		console.log(result);
+			    // var json=JSON.stringify(result);
+			    // console.log(json[0][0]);
+	      //  		var sessionId=json[0][0][1].loginResponse.result.sessionId;
+	      //  		console.log(sessionId);
 	       		callback2(sessionId);
 			});
 	    }else {console.log("eror"+error);}
