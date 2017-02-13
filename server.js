@@ -126,8 +126,8 @@ function connectToSF(callback2){
 	       parseString(xml, function (err, result) {
 	       		console.log(result);
 			    var json=JSON.stringify(result);
-			    console.log(json);
-	       		var sessionId=json.loginResponse.result.sessionId;
+			    console.log(json.soapenv:Envelope);
+	       		var sessionId=json.soapenv:Envelope.$.xmlns:soapenv.soapenv:Body.loginResponse.result.sessionId;
 	       		console.log(sessionId);
 	       		callback2(sessionId);
 			});
