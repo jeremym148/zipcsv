@@ -125,7 +125,8 @@ function connectToSF(callback2){
 	       parseString(body, function (err, result) {
 	       		console.log(result);
 	       		var resultparsed=(result.toString().replace(":","_")).replace("$","dollar");
-			    var json=JSON.stringify(result);
+	       		console.log(resultparsed);
+			    var json=JSON.stringify(resultparsed);
 	       		var sessionId=json.soapenv_Envelope.dollar.soapenv_Body.loginResponse.result.sessionId;
 	       		console.log(sessionId);
 	       		callback2(sessionId);
