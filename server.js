@@ -118,19 +118,17 @@ function connectToSF(callback2){
 	}	
 	// Start the request
 	request(options, function (error, response, body) {
-		console.log(response.statusCode);
 	    if (!error && response.statusCode == 200) {
 	        // Print out the response body
 	       console.log('123'+body);
 	       var xml=body;
 	       parseString(xml, function (err, result) {
 			    var json=JSON.stringify(result);
-			    console.log(json);
 	       		var sessionId=json.loginResponse.result.sessionId;
 	       		console.log(sessionId);
 	       		callback2(sessionId);
 			});
-	    }else {console.log("error "+error}
+	    }else {console.log("eror"+error);}
 	})
 }
 
