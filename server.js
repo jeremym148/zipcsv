@@ -130,7 +130,7 @@ function connectToSF(callback2){
 	       		var sessionId=jsonslice(100,55);
 	       		console.log(sessionId);
 	       		callback2(sessionId);
-			
+			});
 	    }else {console.log("eror"+error);}
 	})
 }
