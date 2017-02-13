@@ -49,6 +49,8 @@ function chilkatExample(csv) {
     	 console.log("zip "+zip.LastErrorText);
     	  console.log("zip "+ success);
     }
+     zip.SetPassword("secret");
+    zip.PasswordProtect = true;
 
     //  Add the string "Hello World!" to the .zip
     entry = zip.AppendString2("helloWorld.csv",csv,"utf-8");
