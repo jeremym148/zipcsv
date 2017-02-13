@@ -102,7 +102,7 @@ function sendDocToSF(zip64, callback){
 }
 
 function connectToSF(callback2){
-
+	console.log('105');
 	// Set the headers
 	var headers = {
 	    'Content-Type': 'text/xml',
@@ -118,7 +118,7 @@ function connectToSF(callback2){
 	}	
 	// Start the request
 	request(options, function (error, response, body) {
-	    if (!error && response.statusCode == 201) {
+	    if (!error && response.statusCode == 200) {
 	        // Print out the response body
 	       console.log(body);
 	       var xml=body;
