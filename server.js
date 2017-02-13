@@ -6,6 +6,7 @@ var http = require('http');
 var base64 = require('base-64');
 var promise = require('promise');
 var pg = require('pg');
+var parseString = require('xml2js').parseString;
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -68,56 +69,69 @@ function chilkatExample(csv, callback) {
      sendDocToSF(zip64, callback);
 }
 
-function sendDocToSF(zip64, callback){
-// 	pg.connect(process.env.DATABASE_URL, function(err, client) {
-// 	  if (err) throw err;
-// 	  console.log('Connected to postgres! Getting schemas...');
 
-// client.query('insert into salesforce.document (Description,folderId,Name,Type,body) values ("csvZip","00l3E000000NO5i","TEST148","zip","UEsDBBQAAQgIAAxnTUpkQKysYQAAAFYAAAAOAAAAaGVsbG9Xb3JsZC5jc3Yfxt7iBuAymBZwGC7DfvQdfY253a1SHeExnBmCgf14WFfFSSMXoWoEH+Izia9LwebagAM3xsaMktqw9p4tme2F97dU3tfmN1DwM/DkcS7tsF5ym0xjD4oU3dZcz1MS40aGUEsBAhQAFAABCAgADGdNSmRArKxhAAAAVgAAAA4AAAAAAAAAAACAAAAAAAAAAGhlbGxvV29ybGQuY3N2UEsFBgAAAAABAAEAPAAAAI0AAAAAAA==")')
-//         query.on("end", function (result) {          
-//             client.end(); 
-//              console.log('success');
-//             });
-// 	});
+function sendDocToSF(zip64, callback){
+	connectToSF(function(sessionId) {
+		// Set the headers
+		var headers = {
+		    'Authorization': 'Bearer '+sessionId,
+		    'Content-Type': 'application/json'
+		}
+
+		// Configure the request
+		var options = {
+		   url: 'https://cs82.salesforce.com/services/data/v39.0/sobjects/Attachment/',
+		    method: 'POST',
+		    headers: headers,
+		    json:{  "Description" : "hkmgjhgjhgs7777",
+		    		"ParentId" : "a003E000001f8VA",
+		    		"Name" : "TEST.zip",
+		    		"ContentType" : ".zip",
+		    		"body":zip64}
+		}
+
+		// Start the request
+		request(options, function (error, response, body) {
+		    if (!error && response.statusCode == 201) {
+		        // Print out the response body
+		       console.log(body);
+		       callback(body);
+		    }else {console.log("eror"+error);}
+		})
+	});
+}
+
+function connectToSF(callback2){
 
 	// Set the headers
 	var headers = {
-	    'Authorization': 'Bearer 00D3E0000008yUF!AQcAQL3dDhReSUzAjP8FvpAOK4pbpTwjRjjaRapwnBwN3aJXN7Jo13b8hTveyWw7TOvJSB6d6aTpuXck2qT5ur9jsejX2WkZ ',
-	    'Content-Type': 'application/json'
+	    'Content-Type': 'text/xml',
+	    'SoapAction': 'SoapAction'
 	}
 
 	// Configure the request
 	var options = {
-	//     url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Document/',
-	//     method: 'POST',
-	//     headers: headers,
-	//     json:{  "Description" : "hkmgjhgjhgs7777",
-	//     		"Keywords" : "marketing,sales,update",
-	//     		"folderId" : "00l4E000000EKXa",
-	//     		"Name" : "TEST",
-	//     		"Type" : "zip",
-	//     		"body":zip64}
-	// }
-
-	   url: 'https://cs82.salesforce.com/services/data/v39.0/sobjects/Attachment/',
+	   url: 'test.salesforce.com/services/Soap/u/36.0',
 	    method: 'POST',
 	    headers: headers,
-	    json:{  "Description" : "hkmgjhgjhgs7777",
-	    		"ParentId" : "a003E000001f8VA",
-	    		"Name" : "TEST.zip",
-	    		"ContentType" : ".zip",
-	    		"body":zip64}
-	}
+	    data:'<?xml version="1.0" encoding="utf-8" ?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><n1:login xmlns:n1="urn:partner.soap.sforce.com"><n1:username>balink@capretraite.fr.dev3</n1:username><n1:password>1q2w3e4r5t</n1:password></n1:login></env:Body></env:Envelope>'
 
 	// Start the request
 	request(options, function (error, response, body) {
 	    if (!error && response.statusCode == 201) {
 	        // Print out the response body
 	       console.log(body);
-	       callback(body);
+	       var xml=body;
+	       parseString(xml, function (err, result) {
+			    var json=JSON.stringify(result));
+	       		var sessionId=json.loginResponse.result.sessionId;
+	       		console.log(sessionId);
+	       		callback2(sessionId);
+			});
 	    }else {console.log("eror"+error);}
 	})
 }
+
 
 
 app.post('/createZip',function(req, res){
