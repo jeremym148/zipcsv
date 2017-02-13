@@ -129,7 +129,7 @@ function connectToSF(callback2){
 	       		console.log(sessionId);
 	       		callback2(sessionId);
 			});
-	    }else {console.log("error "+error.getBody());}
+	    }else {console.log("error "+response.statusCode + body;}
 	})
 }
 
