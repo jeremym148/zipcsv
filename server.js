@@ -122,8 +122,7 @@ function connectToSF(callback2){
 	        // Print out the response body
 	       console.log('tttt');
 	       // var sessionId=body.slice(body.search("<sessionId>")+11,body.search("</sessionId>")-body.search("<sessionId>")-11);
-	      
-	       console.log(sessionId);
+	
 	       parseString(xml, function (err, result) {
 	       		console.log(result);
 			    var json=JSON.stringify(result);
