@@ -124,7 +124,7 @@ function connectToSF(callback2){
 	       // var sessionId=body.slice(body.search("<sessionId>")+11,body.search("</sessionId>")-body.search("<sessionId>")-11);
 	       parseString(body, function (err, result) {
 	       		console.log(result);
-	       		var resultparsed=(result.toString().replace(":","_"));
+	       		var resultparsed=(JSON.stringify(result).replace(":","_"));
 	       		console.log(resultparsed);
 			    var json=JSON.stringify(resultparsed);
 			    console.log(json);
