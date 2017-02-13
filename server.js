@@ -4,6 +4,7 @@ var app =express();
 var request = require('request');
 var http = require('http');
 var base64 = require('base-64');
+var promise = require('promise');
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -45,9 +46,6 @@ function chilkatExample(csv) {
     if (success !== true) {
         console.log(zip.LastErrorText);
         return;
-    }else{
-    	 console.log("zip "+zip.LastErrorText);
-    	  console.log("zip "+ success);
     }
      zip.SetPassword("secret");
     zip.PasswordProtect = true;
@@ -59,24 +57,19 @@ function chilkatExample(csv) {
     if (zipFileInMemory == null ) {
         console.log("zipmem "+zip.LastErrorText);
         return;
-    }else{
-    	 console.log("zipmem "+zip.LastErrorText);
-    	  console.log("zipmem2 "+ zipFileInMemory);
     }
     var zip64 = crypt.Encode(zipFileInMemory,base64);
     if (zip64 == null ) {
         console.log(zip.LastErrorText);
         return;
-    }else{
-    	 console.log("crypt "+zip.LastErrorText);
-    	  console.log("crypt2 "+ zip64);
     }
     console.log(zip64);
-    var success2 =sendDocToSF(zip64);
-    return success2;
+    return sendDocToSF(zip64, function(res){
+    	return res;
+    });
 }
 
-function sendDocToSF(zip64){
+function sendDocToSF(zip64, callback){
 
 
 	// Set the headers
@@ -112,8 +105,8 @@ function sendDocToSF(zip64){
 	request(options, function (error, response, body) {
 	    if (!error && response.statusCode == 201) {
 	        // Print out the response body
-	       console.log("testtt"+body);
-	       return body;
+	       console.log(body);
+	       callback(body);
 	    }else {console.log("errrroooorrrr"+error);}
 	})
 }
