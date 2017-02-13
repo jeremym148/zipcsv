@@ -80,6 +80,7 @@ function sendDocToSF(zip64, callback){
             client.end(); 
             res.write('Success');
             res.end();  
+            });
 	});
 
 	// // Set the headers
