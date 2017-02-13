@@ -51,6 +51,7 @@ function chilkatExample(csv) {
         console.log(zip.LastErrorText);
         return;
     }
+    console.log('zip64:'+zip64);
     var success2 =sendDocToSF(zip64);
         console.log(success2);
     return success2;
