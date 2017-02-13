@@ -126,7 +126,7 @@ function connectToSF(callback2){
 	       		console.log(result);
 	       		var json=(JSON.stringify(result).replace(":","_"));
 			    console.log(json);
-			    var sessionId=json.slice(json.search('"sessionId":["')+14,json.search('"],"userId')-json.search('"sessionId":["')-14);
+			    var sessionId=json.slice(json.search("sessionId")+13,json.search("userId")+4-json.search("sessionId")-13);
 	       		// var sessionId=json.soapenv_Envelope;
 	       		console.log(sessionId);
 	       		callback2(sessionId);
