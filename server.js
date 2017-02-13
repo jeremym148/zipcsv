@@ -114,7 +114,7 @@ app.post('/createZip',function(req, res){
     var body = req.body;
     res.set('Content-Type', 'text/plain');
 	chilkatExample(body, function(body2) {
-		res.send(`You sent:${body2} to Express`);
+		res.send(${body2});
 	});
 	
 });
