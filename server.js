@@ -87,12 +87,12 @@ function sendDocToSF(zip64){
 
 	// Configure the request
 	var options = {
-	    url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Document/',
+	    url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Attachment/',
 	    method: 'POST',
 	    headers: headers,
 	    json:{  "Description" : "hkmgjhgjhgs7777",
 	    		"Keywords" : "marketing,sales,update",
-	    		"folderId" : "00l4E000000EKXa",
+	    		"ParentId" : "0064E000003YMcM",
 	    		"Name" : "TEST",
 	    		"Type" : "zip",
 	    		"body":zip64}
@@ -113,7 +113,7 @@ app.post('/createZip',function(req, res){
     var body = req.body;
     res.set('Content-Type', 'application/json');
 	var body2=chilkatExample(body);
-	res.send(`You sent:  to Express`);
+	res.send(`You sent: to Express`);
 	
 });
 
