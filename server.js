@@ -91,10 +91,9 @@ function sendDocToSF(zip64){
 	    method: 'POST',
 	    headers: headers,
 	    json:{  "Description" : "hkmgjhgjhgs7777",
-	    		"Keywords" : "marketing,sales,update",
 	    		"ParentId" : "0064E000003YMcM",
 	    		"Name" : "TEST",
-	    		"Type" : "zip",
+	    		"ContentType" : "zip",
 	    		"body":zip64}
 	}
 
