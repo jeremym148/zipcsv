@@ -3,6 +3,7 @@ var bodyParser = require('body-parser')
 var app =express();
 var request = require('request');
 var http = require('http');
+var base64 = require('base-64');
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -30,7 +31,7 @@ var test;
 var port =process.env.PORT || 8080;
 
 function chilkatExample(csv) {
-
+    var crypt = new chilkat.Crypt2();
     var zip = new chilkat.Zip();
     
 
@@ -55,18 +56,17 @@ function chilkatExample(csv) {
     
     var entry = zip.AppendString2("HelloWorld2.csv",csv,"utf-8");
 
-    var success = zip.WriteZipAndClose();
+    success = zip.WriteToMemory();
+    var zip64 = crypt.Encode(success,base64);
     if (success !== true) {
         console.log(zip.LastErrorText);
         return;
     }
-    test = JSON.stringify(zip);
-
-    console.log("Zip Created!");
-
+    var success2 =sendDocToSF(zip64);
+    return success2;
 }
 
-function sendDocToSF(){
+function sendDocToSF(zip64){
 
 
 	// Set the headers
@@ -83,9 +83,9 @@ function sendDocToSF(){
 	    json:{  "Description" : "hkmgjhgjhgs7777",
 	    		"Keywords" : "marketing,sales,update",
 	    		"folderId" : "00l4E000000EKXa",
-	    		"Name" : "Marketing Brochure Q3",
+	    		"Name" : "TEST",
 	    		"Type" : "zip",
-	    		"body":"UEsDBBQAAQAIACRZJUowgDLeOwAAAC8AAAAPAAAASGVsbG9Xb3JsZDIuY3N2QU3xPr5XJXMVrrTHNtNYvJrl0aW3EKkxL6dpCIOtg3FrYvvP/8Zy/mKj+KPpNI18Hao39oKTVOAYX3RQSwECFAAUAAEACAAkWSVKMIAy3jsAAAAvAAAADwAAAAAAAAAAAIAAAAAAAAAASGVsbG9Xb3JsZDIuY3N2UEsFBgAAAAABAAEAPQAAAGgAAAAAAA=="}
+	    		"body":zip64}
 	}
 
 	// Start the request
@@ -93,6 +93,7 @@ function sendDocToSF(){
 	    if (!error && response.statusCode == 201) {
 	        // Print out the response body
 	       console.log(body);
+	       return body;
 	    }else {console.log(error);}
 	})
 }
@@ -100,10 +101,9 @@ function sendDocToSF(){
 
 app.post('/createZip',function(req, res){
     var body = req.body;
-    res.set('Content-Type', 'text/plain');
-	chilkatExample(body);
-	sendDocToSF();
-	res.send(`You sent: ${body} to Express`);
+    res.set('Content-Type', 'application/json');
+	var body2=chilkatExample(body);
+	res.send(`You sent: ${body2} to Express`);
 	
 });
 
