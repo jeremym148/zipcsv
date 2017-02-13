@@ -123,9 +123,9 @@ function connectToSF(callback2){
 	    if (!error && response.statusCode == 200) {
 	        // Print out the response body
 	       
-	        var obj = JSON.stringify(parse(body));
-	        console.log(inspect(obj, { colors: true, depth: Infinity }));
-	        // console.log(obj.declaration.root.children.children);
+	        var obj = parse(body);
+	        var test= obj.root.children;
+	        console.log(test);
 	        
 
 	       console.log('tttt');
