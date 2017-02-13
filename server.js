@@ -123,7 +123,7 @@ function connectToSF(callback2){
 	        // Print out the response body
 	       
 	        var obj = JSON.stringify(parse(body));
-	        console.log(obj);
+	        console.log(obj.declaration.root.children.children);
 	        
 
 	       console.log('tttt');
