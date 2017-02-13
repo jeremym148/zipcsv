@@ -47,7 +47,7 @@ function chilkatExample(csv) {
     zipFileInMemory = zip.WriteToMemory();
   
     var zip64 = crypt.Encode(zipFileInMemory,base64);
-    if (zip64 !== true) {
+    if (zip64 == null ) {
         console.log(zip.LastErrorText);
         return;
     }
