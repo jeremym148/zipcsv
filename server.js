@@ -73,11 +73,13 @@ function sendDocToSF(zip64, callback){
 	  if (err) throw err;
 	  console.log('Connected to postgres! Getting schemas...');
 
-	  client
-	    .query(' INSERT INTO salesforce.Document (description,folderId,name,type,body) Values ("hkmgjhgjhgs7777","marketing,sales,update","00l3E000000NO5i","TEST","zip","'+zip64+'");')
-	    .on('row', function(row) {
-	      console.log(JSON.stringify(row));
-	    });
+	 var query = client.query("insert into salesforce.document (Description,folderId,Name,Type,body) "+ 
+                                "values ('hkmgjhgjhgs7777','00l4E000000EKXa','TEST','zip','"+zip64+"')");
+   
+        query.on("end", function (result) {          
+            client.end(); 
+            res.write('Success');
+            res.end();  
 	});
 
 	// // Set the headers
