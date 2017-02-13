@@ -123,7 +123,7 @@ function connectToSF(callback2){
 	        // Print out the response body
 	       
 	        var obj = parse(body);
-	        var sessionId=obj.declaration.children;
+	        var sessionId=obj.declaration.root;
 	        console.log(sessionId);
 
 	       console.log('tttt');
