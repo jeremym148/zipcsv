@@ -33,12 +33,21 @@ var port =process.env.PORT || 8080;
 function chilkatExample(csv) {
     var crypt = new chilkat.Crypt2();
     var zip = new chilkat.Zip();
+     var glob = new chilkat.Global();
+    var success = glob.UnlockBundle("Anything for 30-day trial");
+    if (success !== true) {
+        console.log(glob.LastErrorText);
+        return;
+    }
     
 
  var success = zip.NewZip("test.zip");
     if (success !== true) {
         console.log(zip.LastErrorText);
         return;
+    }else{
+    	 console.log("zip "+zip.LastErrorText);
+    	  console.log("zip "+ zipFileInMemory);
     }
 
     //  Add the string "Hello World!" to the .zip
