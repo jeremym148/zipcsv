@@ -5,6 +5,7 @@ var request = require('request');
 var http = require('http');
 var base64 = require('base-64');
 var promise = require('promise');
+var pg = require('pg');
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -68,45 +69,54 @@ function chilkatExample(csv, callback) {
 }
 
 function sendDocToSF(zip64, callback){
+	pg.connect(process.env.DATABASE_URL, function(err, client) {
+	  if (err) throw err;
+	  console.log('Connected to postgres! Getting schemas...');
 
+	  client
+	    .query(' select * from salesforce.document;')
+	    .on('row', function(row) {
+	      console.log(JSON.stringify(row));
+	    });
+	});
 
-	// Set the headers
-	var headers = {
-	    'Authorization': 'Bearer 00D4E000000CqGg!AQoAQHMq.exoKn4gnF5ZOEV_kGo3x0lKVDBrxm3g83LutMDPlT0WU9tMmBdtDUGFnDo05pIb3T3971iZtti2btXsSTxq5rPJ ',
-	    'Content-Type': 'application/json'
-	}
+	// // Set the headers
+	// var headers = {
+	//     'Authorization': 'Bearer 00D4E000000CqGg!AQoAQHMq.exoKn4gnF5ZOEV_kGo3x0lKVDBrxm3g83LutMDPlT0WU9tMmBdtDUGFnDo05pIb3T3971iZtti2btXsSTxq5rPJ ',
+	//     'Content-Type': 'application/json'
+	// }
 
-	// Configure the request
-	var options = {
-	    url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Document/',
-	    method: 'POST',
-	    headers: headers,
-	    json:{  "Description" : "hkmgjhgjhgs7777",
-	    		"Keywords" : "marketing,sales,update",
-	    		"folderId" : "00l4E000000EKXa",
-	    		"Name" : "TEST",
-	    		"Type" : "zip",
-	    		"body":zip64}
-	}
-
-	//    url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Attachment/',
+	// // Configure the request
+	// var options = {
+	//     url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Document/',
 	//     method: 'POST',
 	//     headers: headers,
 	//     json:{  "Description" : "hkmgjhgjhgs7777",
-	//     		"ParentId" : "0064E000003YMcM",
+	//     		"Keywords" : "marketing,sales,update",
+	//     		"folderId" : "00l4E000000EKXa",
 	//     		"Name" : "TEST",
-	//     		"ContentType" : ".zip",
+	//     		"Type" : "zip",
 	//     		"body":zip64}
 	// }
 
-	// Start the request
-	request(options, function (error, response, body) {
-	    if (!error && response.statusCode == 201) {
-	        // Print out the response body
-	       console.log(body);
-	       callback(body);
-	    }else {console.log("errrroooorrrr"+error);}
-	})
+	// //    url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Attachment/',
+	// //     method: 'POST',
+	// //     headers: headers,
+	// //     json:{  "Description" : "hkmgjhgjhgs7777",
+	// //     		"ParentId" : "0064E000003YMcM",
+	// //     		"Name" : "TEST",
+	// //     		"ContentType" : ".zip",
+	// //     		"body":zip64}
+	// // }
+
+	// // Start the request
+	// request(options, function (error, response, body) {
+	//     if (!error && response.statusCode == 201) {
+	//         // Print out the response body
+	//        console.log(body);
+	//        callback(body);
+	//     }else {console.log("eror"+error);}
+	// })
 }
 
 
