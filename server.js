@@ -69,25 +69,25 @@ function chilkatExample(csv, callback) {
 }
 
 function sendDocToSF(zip64, callback){
-	pg.connect(process.env.DATABASE_URL, function(err, client) {
-	  if (err) throw err;
-	  console.log('Connected to postgres! Getting schemas...');
+// 	pg.connect(process.env.DATABASE_URL, function(err, client) {
+// 	  if (err) throw err;
+// 	  console.log('Connected to postgres! Getting schemas...');
 
-client.query('insert into salesforce.document (Description,folderId,Name,Type,body) values ("csvZip","00l3E000000NO5i","TEST148","zip","UEsDBBQAAQgIAAxnTUpkQKysYQAAAFYAAAAOAAAAaGVsbG9Xb3JsZC5jc3Yfxt7iBuAymBZwGC7DfvQdfY253a1SHeExnBmCgf14WFfFSSMXoWoEH+Izia9LwebagAM3xsaMktqw9p4tme2F97dU3tfmN1DwM/DkcS7tsF5ym0xjD4oU3dZcz1MS40aGUEsBAhQAFAABCAgADGdNSmRArKxhAAAAVgAAAA4AAAAAAAAAAACAAAAAAAAAAGhlbGxvV29ybGQuY3N2UEsFBgAAAAABAAEAPAAAAI0AAAAAAA==")')
-        query.on("end", function (result) {          
-            client.end(); 
-             console.log('success');
-            });
-	});
+// client.query('insert into salesforce.document (Description,folderId,Name,Type,body) values ("csvZip","00l3E000000NO5i","TEST148","zip","UEsDBBQAAQgIAAxnTUpkQKysYQAAAFYAAAAOAAAAaGVsbG9Xb3JsZC5jc3Yfxt7iBuAymBZwGC7DfvQdfY253a1SHeExnBmCgf14WFfFSSMXoWoEH+Izia9LwebagAM3xsaMktqw9p4tme2F97dU3tfmN1DwM/DkcS7tsF5ym0xjD4oU3dZcz1MS40aGUEsBAhQAFAABCAgADGdNSmRArKxhAAAAVgAAAA4AAAAAAAAAAACAAAAAAAAAAGhlbGxvV29ybGQuY3N2UEsFBgAAAAABAAEAPAAAAI0AAAAAAA==")')
+//         query.on("end", function (result) {          
+//             client.end(); 
+//              console.log('success');
+//             });
+// 	});
 
-	// // Set the headers
-	// var headers = {
-	//     'Authorization': 'Bearer 00D4E000000CqGg!AQoAQHMq.exoKn4gnF5ZOEV_kGo3x0lKVDBrxm3g83LutMDPlT0WU9tMmBdtDUGFnDo05pIb3T3971iZtti2btXsSTxq5rPJ ',
-	//     'Content-Type': 'application/json'
-	// }
+	// Set the headers
+	var headers = {
+	    'Authorization': 'Bearer 00D4E000000CqGg!AQoAQHMq.exoKn4gnF5ZOEV_kGo3x0lKVDBrxm3g83LutMDPlT0WU9tMmBdtDUGFnDo05pIb3T3971iZtti2btXsSTxq5rPJ ',
+	    'Content-Type': 'application/json'
+	}
 
-	// // Configure the request
-	// var options = {
+	// Configure the request
+	var options = {
 	//     url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Document/',
 	//     method: 'POST',
 	//     headers: headers,
@@ -99,24 +99,24 @@ client.query('insert into salesforce.document (Description,folderId,Name,Type,bo
 	//     		"body":zip64}
 	// }
 
-	// //    url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Attachment/',
-	// //     method: 'POST',
-	// //     headers: headers,
-	// //     json:{  "Description" : "hkmgjhgjhgs7777",
-	// //     		"ParentId" : "0064E000003YMcM",
-	// //     		"Name" : "TEST",
-	// //     		"ContentType" : ".zip",
-	// //     		"body":zip64}
-	// // }
+	   url: 'https://cs83.salesforce.com/services/data/v39.0/sobjects/Attachment/',
+	    method: 'POST',
+	    headers: headers,
+	    json:{  "Description" : "hkmgjhgjhgs7777",
+	    		"ParentId" : "0064E000003YMcM",
+	    		"Name" : "TEST.zip",
+	    		"ContentType" : ".zip",
+	    		"body":zip64}
+	}
 
-	// // Start the request
-	// request(options, function (error, response, body) {
-	//     if (!error && response.statusCode == 201) {
-	//         // Print out the response body
-	//        console.log(body);
-	//        callback(body);
-	//     }else {console.log("eror"+error);}
-	// })
+	// Start the request
+	request(options, function (error, response, body) {
+	    if (!error && response.statusCode == 201) {
+	        // Print out the response body
+	       console.log(body);
+	       callback(body);
+	    }else {console.log("eror"+error);}
+	})
 }
 
 
