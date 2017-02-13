@@ -122,30 +122,11 @@ function connectToSF(callback2){
 		console.log(response.statusCode);
 	    if (!error && response.statusCode == 200) {
 	        // Print out the response body
-	       
 	        var obj = parse(body);
-	        var test= obj.root.children[0].children[0].children[0].children[4].content;
-	        console.log(test);
-	        
-
-	       console.log('tttt');
-	       // var sessionId=body.slice(body.search('"sessionId":["')+14,body.search('"],"userId')-body.search('"sessionId":["')-14);
-	  //      parseString(body, function (err, result) {
-	  //      		// console.log(result);
-	  //      		var json=JSON.stringify(result);
-	  //      		var array = [];
-			//     console.log(json);
-			//     for(var key in json){
-			// 	    if(!json.hasOwnProperty(key)){
-			// 	        continue;
-			// 	    }
-			// 	    array.push(key, json[key]);
-			// 	}console.log(array, array.slice(0, 4));
-			//     // var sessionId=json.slice(50,50);
-	  //     //  		// var sessionId=json.soapenv_Envelope;
-	  //     //  		console.log(sessionId);
-	  //     //  		callback2(sessionId);
-			// });
+	        var sessionId= obj.root.children[0].children[0].children[0].children[4].content;
+	        console.log(sessionId);
+	        callback2(sessionId);
+		
 	    }else {console.log("eror"+error);}
 	})
 }
