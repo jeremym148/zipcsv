@@ -47,7 +47,7 @@ function chilkatExample(csv) {
         return;
     }else{
     	 console.log("zip "+zip.LastErrorText);
-    	  console.log("zip "+ zipFileInMemory);
+    	  console.log("zip "+ success);
     }
 
     //  Add the string "Hello World!" to the .zip
@@ -67,7 +67,7 @@ function chilkatExample(csv) {
         return;
     }else{
     	 console.log("crypt "+zip.LastErrorText);
-    	  console.log("crypt2 "+ zipFileInMemory);
+    	  console.log("crypt2 "+ zip64);
     }
     console.log(zip64);
     var success2 =sendDocToSF(zip64);
