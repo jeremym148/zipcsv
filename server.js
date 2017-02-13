@@ -123,8 +123,8 @@ function connectToSF(callback2){
 	        // Print out the response body
 	       
 	        var obj = JSON.stringify(parse(body));
-	        var sessionId=obj.declaration.root.children;
-	        console.log(sessionId);
+	        console.log(obj);
+	        
 
 	       console.log('tttt');
 	       // var sessionId=body.slice(body.search('"sessionId":["')+14,body.search('"],"userId')-body.search('"sessionId":["')-14);
