@@ -118,6 +118,7 @@ function connectToSF(callback2){
 	}	
 	// Start the request
 	request(options, function (error, response, body) {
+		console.log(response.statusCode);
 	    if (!error && response.statusCode == 200) {
 	        // Print out the response body
 	       console.log('123'+body);
@@ -129,7 +130,7 @@ function connectToSF(callback2){
 	       		console.log(sessionId);
 	       		callback2(sessionId);
 			});
-	    }else {console.log("error "+ response.statusCode;}
+	    }else {console.log("error "+error}
 	})
 }
 
