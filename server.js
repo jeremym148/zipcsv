@@ -124,7 +124,7 @@ function connectToSF(callback2){
 	        // Print out the response body
 	       
 	        var obj = parse(body);
-	        var test= obj.root.children;
+	        var test= obj.root.children[0].children[0].children[0].children[4].content;
 	        console.log(test);
 	        
 
