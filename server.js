@@ -7,7 +7,6 @@ var base64 = require('base-64');
 var promise = require('promise');
 var pg = require('pg');
 var parseString = require('xml2js').parseString;
-var fs = require('fs');
 var parse = require('xml-parser');
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -122,8 +121,8 @@ function connectToSF(callback2){
 		console.log(response.statusCode);
 	    if (!error && response.statusCode == 200) {
 	        // Print out the response body
-	        var xml = fs.readFileSync(body, 'utf8');
-	        var obj = parse(xml);
+	       
+	        var obj = parse(body);
 	        console.log(obj);
 
 	       console.log('tttt');
