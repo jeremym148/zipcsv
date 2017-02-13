@@ -124,11 +124,11 @@ function connectToSF(callback2){
 	       // var sessionId=body.slice(body.search("<sessionId>")+11,body.search("</sessionId>")-body.search("<sessionId>")-11);
 	       parseString(body, function (err, result) {
 	       		console.log(result);
-	       		var resultparsed=(result.toString().replace(":","_")).replace("$","dollar");
+	       		var resultparsed=(result.toString().replace(":","_"));
 	       		console.log(resultparsed);
 			    var json=JSON.stringify(resultparsed);
 			    console.log(json);
-	       		var sessionId=json.soapenv_Envelope.dollar.soapenv_Body.loginResponse.result.sessionId;
+	       		var sessionId=json.soapenv_Envelope;
 	       		console.log(sessionId);
 	       		callback2(sessionId);
 			});
