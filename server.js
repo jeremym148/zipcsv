@@ -85,9 +85,9 @@ function sendDocToSF(zip64){
 	request(options, function (error, response, body) {
 	    if (!error && response.statusCode == 201) {
 	        // Print out the response body
-	       console.log(body);
+	       console.log("testtt"+body);
 	       return body;
-	    }else {console.log(error);}
+	    }else {console.log("errrroooorrrr"+error);}
 	})
 }
 
@@ -96,7 +96,7 @@ app.post('/createZip',function(req, res){
     var body = req.body;
     res.set('Content-Type', 'application/json');
 	var body2=chilkatExample(body);
-	res.send(`You sent: ${body2} to Express`);
+	res.send(`You sent:  to Express`);
 	
 });
 
