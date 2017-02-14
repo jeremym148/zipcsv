@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 var test;
 var port =process.env.PORT || 8080;
 
-function chilkatExample(csv, callback) {
+function chilkatExample(csv,objId, callback) {
     var crypt = new chilkat.Crypt2();
     var zip = new chilkat.Zip();
      var glob = new chilkat.Global();
@@ -67,11 +67,11 @@ function chilkatExample(csv, callback) {
         return;
     }
     console.log(zip64);
-     sendDocToSF(zip64, callback);
+     sendDocToSF(zip64,objId, callback);
 }
 
 
-function sendDocToSF(zip64, callback){
+function sendDocToSF(zip64,objId, callback){
 	connectToSF(function(sessionId) {
 		// Set the headers
 		var headers = {
@@ -84,9 +84,9 @@ function sendDocToSF(zip64, callback){
 		   url: 'https://cs82.salesforce.com/services/data/v39.0/sobjects/Attachment/',
 		    method: 'POST',
 		    headers: headers,
-		    json:{  "Description" : "hkmgjhgjhgs7777",
-		    		"ParentId" : "a003E000001f8VA",
-		    		"Name" : "TEST.zip",
+		    json:{  "Description" : "CsvZip Orpea",
+		    		"ParentId" : objId,
+		    		"Name" : "Orpea.zip",
 		    		"ContentType" : ".zip",
 		    		"body":zip64}
 		}
@@ -134,9 +134,10 @@ function connectToSF(callback2){
 
 
 app.post('/createZip',function(req, res){
-    var body = req.body;
+    var csv = req.body.csv;
+    var objId = req.body.objId;
     res.set('Content-Type', 'text/plain');
-	chilkatExample(body, function(body2) {
+	chilkatExample(csv,objId, function(body2) {
 		res.send(body2.id);
 	});
 	
