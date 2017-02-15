@@ -101,7 +101,7 @@ function sendDocToSF(zip64,objId,refId, callback){
 		    headers: headers,
 		    json:{  "Description" : "CsvZip Orpea",
 		    		"ParentId" : objId,
-		    		"Name" : "nameFile",
+		    		"Name" : nameFile,
 		    		"ContentType" : ".7z",
 		    		"body":zip64}
 		}
