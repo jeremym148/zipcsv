@@ -73,7 +73,21 @@ function chilkatExample(csv,objId,password,refId, callback) {
 
 function sendDocToSF(zip64,objId,refId, callback){
 	connectToSF(function(sessionId) {
-		var nameFile="CAPRETRAITE-"+refId+".7z"
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+
+		if(dd<10) {
+		    dd='0'+dd
+		} 
+
+		if(mm<10) {
+		    mm='0'+mm
+		} 
+
+		today = mm+'/'+dd+'/'+yyyy;
+		var nameFile="CAPRETRAITE-"+refId+"-"+today".7z";
 		// Set the headers
 		var headers = {
 		    'Authorization': 'Bearer '+sessionId,
