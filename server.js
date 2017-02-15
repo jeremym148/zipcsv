@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 var test;
 var port =process.env.PORT || 8080;
 
-function chilkatExample(csv,objId, callback) {
+function chilkatExample(csv,objId,password callback) {
     var crypt = new chilkat.Crypt2();
     var zip = new chilkat.Zip();
      var glob = new chilkat.Global();
@@ -50,7 +50,7 @@ function chilkatExample(csv,objId, callback) {
         console.log(zip.LastErrorText);
         return;
     }
-     zip.SetPassword("secret");
+     zip.SetPassword(password);
     zip.PasswordProtect = true;
 
     //  Add the string "Hello World!" to the .zip
@@ -136,8 +136,9 @@ function connectToSF(callback2){
 app.post('/createZip',function(req, res){
     var csv = req.body.csv;
     var objId = req.body.objId;
+    var password=req.body.password;
     res.set('Content-Type', 'text/plain');
-	chilkatExample(csv,objId, function(body2) {
+	chilkatExample(csv,objId,password, function(body2) {
 		res.send(body2.id);
 	});
 	
