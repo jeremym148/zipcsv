@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 var test;
 var port =process.env.PORT || 8080;
 
-function chilkatExample(csv,objId, callback) {
+function chilkatExample(csv,objId,password,refId callback) {
     var crypt = new chilkat.Crypt2();
     var zip = new chilkat.Zip();
      var glob = new chilkat.Global();
@@ -71,7 +71,7 @@ function chilkatExample(csv,objId, callback) {
 }
 
 
-function sendDocToSF(zip64,objId, callback){
+function sendDocToSF(zip64,objId,refId, callback){
 	connectToSF(function(sessionId) {
 		var today = new Date();
 		var dd = today.getDate();
@@ -154,7 +154,7 @@ app.post('/createZip',function(req, res){
     var password=req.body.password;
     var refId=req.body.refId;
     res.set('Content-Type', 'text/plain');
-	chilkatExample(csv,objId, function(body2) {
+	chilkatExample(csv,objId,password,refId function(body2) {
 		res.send(body2.id);
 	});
 	
