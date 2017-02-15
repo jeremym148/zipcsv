@@ -67,11 +67,11 @@ function chilkatExample(csv,objId,password,refId, callback) {
         return;
     }
     console.log(zip64);
-     sendDocToSF(zip64,objId, callback);
+     sendDocToSF(zip64,objId,refId,callback);
 }
 
 
-function sendDocToSF(zip64,objId,refId, callback){
+function sendDocToSF(zip64,objId,refId,callback){
 	connectToSF(function(sessionId) {
 		var today = new Date();
 		var dd = today.getDate();
@@ -154,7 +154,7 @@ app.post('/createZip',function(req, res){
     var password=req.body.password;
     var refId=req.body.refId;
     res.set('Content-Type', 'text/plain');
-	chilkatExample(csv,objId,password,refId function(body2) {
+	chilkatExample(csv,objId,password,refId, function(body2) {
 		res.send(body2.id);
 	});
 	
