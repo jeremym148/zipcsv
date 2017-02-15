@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 var test;
 var port =process.env.PORT || 8080;
 
-function chilkatExample(csv,objId,password,refId, callback) {
+function chilkatExample(csv,objId, callback) {
     var crypt = new chilkat.Crypt2();
     var zip = new chilkat.Zip();
      var glob = new chilkat.Global();
@@ -67,11 +67,11 @@ function chilkatExample(csv,objId,password,refId, callback) {
         return;
     }
     console.log(zip64);
-     sendDocToSF(zip64,objId,refId, callback);
+     sendDocToSF(zip64,objId, callback);
 }
 
 
-function sendDocToSF(zip64,objId,refId, callback){
+function sendDocToSF(zip64,objId, callback){
 	connectToSF(function(sessionId) {
 		var today = new Date();
 		var dd = today.getDate();
@@ -101,7 +101,7 @@ function sendDocToSF(zip64,objId,refId, callback){
 		    headers: headers,
 		    json:{  "Description" : "CsvZip Orpea",
 		    		"ParentId" : objId,
-		    		"Name" : nameFile,
+		    		"Name" : "nameFile",
 		    		"ContentType" : ".7z",
 		    		"body":zip64}
 		}
@@ -154,7 +154,7 @@ app.post('/createZip',function(req, res){
     var password=req.body.password;
     var refId=req.body.refId;
     res.set('Content-Type', 'text/plain');
-	chilkatExample(csv,objId,password,refId, function(body2) {
+	chilkatExample(csv,objId, function(body2) {
 		res.send(body2.id);
 	});
 	
