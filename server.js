@@ -87,7 +87,7 @@ function sendDocToSF(zip64,objId,refId, callback){
 		} 
 
 		today = mm+'/'+dd+'/'+yyyy;
-		var nameFile="CAPRETRAITE-"+refId+"-"+today".7z";
+		var nameFile='CAPRETRAITE-'+refId+'-'+today+'.7z';
 		// Set the headers
 		var headers = {
 		    'Authorization': 'Bearer '+sessionId,
