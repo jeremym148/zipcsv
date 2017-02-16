@@ -54,7 +54,20 @@ function chilkatExample(csv,objId,password,refId, callback) {
     zip.PasswordProtect = true;
 
     //  Add the string "Hello World!" to the .zip
-    entry = zip.AppendString2("helloWorld.csv",csv,"utf-8");
+    var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+
+		if(dd<10) {
+		    dd='0'+dd
+		} 
+		if(mm<10) {
+		    mm='0'+mm
+		} 
+
+		today = mm+'/'+dd+'/'+yyyy;
+    entry = zip.AppendString2("CAPRETRAITE-"+refId+"-"+today+".csv",csv,"utf-8");
 
     zipFileInMemory = zip.WriteToMemory();
     if (zipFileInMemory == null ) {
