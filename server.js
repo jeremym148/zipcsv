@@ -68,12 +68,22 @@ function chilkatExample(csv,objId,password,refId, callback) {
 		var hour = today.getHours();
 
 
+		
 		if(dd<10) {
 		    dd='0'+dd
 		} 
 		if(mm<10) {
 		    mm='0'+mm
 		} 
+		if(seconds<10) {
+		    seconds='0'+seconds
+		}
+		if(minutes<10) {
+		    minutes='0'+minutes
+		}
+		if(hour<10) {
+		    hour='0'+hour
+		}
 		var theRefId='';
 		if(refId.length<6){
 	        for(var j=0;j<(6-refId.length);j++){
